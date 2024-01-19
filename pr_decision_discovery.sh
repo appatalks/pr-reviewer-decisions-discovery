@@ -47,6 +47,11 @@ while true; do
 
   # Extract the "Link" header
   link_header=$(echo "$headers" | awk '/^link:/ {print $0}')
+  echo ""
+  echo "Discovering Repo Listing Standby: "
+  echo ""
+  echo $link_header
+  echo ""
 
   # Check if "rel=next" is in the "link" header
   if echo "$link_header" | grep -q 'rel="next"'; then
