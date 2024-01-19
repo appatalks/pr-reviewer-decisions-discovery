@@ -24,7 +24,7 @@ My-Super-Cool-ORG
 1. The script first checks if the GitHub API token is set. If not, it throws an error message and exits.
 2. Next, it asks for the organization name.
 3. It then iterates through all the pages of repositories for the given organization, storing the names of the repositories in an array.
-4. It then uses a GraphQL query to retrieve the last 100 Pull Request Review Decisions for each repository.
+4. It then uses a GraphQL query to retrieve the last 100 Pull Request Review Decisions for each repository. (Maybe 100 is too much? 🤔)
 5. The responses from the API calls are logged in a JSON file.
 
 ## Rate Limiting
@@ -46,4 +46,4 @@ If the organization does not exist or has no repositories, the script will error
 
 ## Disclaimer
 
-This should be treated as a proof-of-concept. Very happy to have contributers and large oranization testers report back.
+This should be treated as a proof-of-concept. Very happy to have contributers and large organization testers report back.
