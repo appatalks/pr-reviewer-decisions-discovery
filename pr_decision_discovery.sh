@@ -24,7 +24,7 @@ echo "Please enter the organization name: "
 read orgName
 
 # Set up GitHub API url
-url="https://api.github.com/orgs/$orgName/repos"
+url="https://api.github.com/orgs/$orgName/repos?per_page=99"
 
 # Define an empty array to store the repositories
 repos=()
@@ -35,7 +35,7 @@ page=1
 # Use a while loop to iterate through all the pages
 while true; do
   # Send GET request to the current page URL and retrieve the repositories
-  page_repos=$(curl -s -H "Authorization: token $TOKEN" "$url?page=$page" | jq -r '.[] | .name, .private')
+  page_repos=$(curl -s -H "Authorization: token $TOKEN" "$url&page=$page" | jq -r '.[] | .name, .private')
 
 # Add the repositories to the array one by one
   while IFS= read -r repo; do
@@ -43,7 +43,7 @@ while true; do
   done <<< "$page_repos"
 
   # Send GET request to GitHub API and retrieve the response headers
-  headers=$(curl -s -I -H "Authorization: token $TOKEN" "$url?page=$page")
+  headers=$(curl -s -I -H "Authorization: token $TOKEN" "$url&page=$page")
 
   # Extract the "Link" header
   link_header=$(echo "$headers" | awk '/^link:/ {print $0}')
@@ -66,6 +66,9 @@ while true; do
 
   # Increment the page counter
   ((page++))
+
+  # Add a delay of n second between each REST API request
+  sleep 6
   done
 
   # Print the array of repositories
@@ -141,7 +144,7 @@ if echo "$response" | jq '.data,.errors' &> /dev/null; then
     echo "$errors_response" | jq
   fi
 fi
-  # Add a delay of n second between each API request
+  # Add a delay of n second between each GraphQL API request
   sleep 6
   echo ""
   echo "Discovery ran on $repository. Proceeding to next Repository"
