@@ -31,6 +31,10 @@ My-Super-Cool-ORG
 
 To avoid hitting rate limits, the script includes a delay of ```6 seconds``` between each API call (soooo [many factors](https://docs.github.com/en/graphql/overview/rate-limits-and-node-limits-for-the-graphql-api#predicting-the-point-value-of-a-query) to think about 🤔). Assuming an organization has 10,000 repositories, the script should take just under a day to run.
 
+## Tests
+
+Succesfull ran through an organization with ```1000 repositories``` and base settings in ```1.5 Hours```.
+
 ## Logs
 
 The script creates two log files:
